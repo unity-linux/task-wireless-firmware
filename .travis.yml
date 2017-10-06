@@ -4,7 +4,7 @@ services:
 - docker
 install: true
 before_install:
-- openssl aes-256-cbc -K $encrypted_eb6f370c36aa_key -iv $encrypted_eb6f370c36aa_iv -in .stuff.tar.gz.enc -out stuff.tar.gz -d
+- openssl aes-256-cbc -K $encrypted_06b053e220f1_key -iv $encrypted_06b053e220f1_iv -in .stuff.tar.gz.enc -out stuff.tar.gz -d
 - tar xzvf stuff.tar.gz -C /tmp/
 - eval "$(ssh-agent -s)"
 - chmod 600 /tmp/stuff/.deploy
@@ -24,4 +24,4 @@ script:
 - find ~/ -name *.src.rpm
 after_success:
 - sudo -H pip install --upgrade pyOpenSSL ndg-httpsclient pyasn1 requests[security] jinja2 marshmallow copr-cli simplejson
-- if [ -f $(find ~/ -name *.src.rpm) ]; then copr-cli --config /tmp/stuff/.copr build -r Mageia-6-x86_64 jmiahman/Unity-Linux $(find ~/ -name *.src.rpm); fi
+- if [ $MOCK_CONFIG == "mageia-6-x86_64" ]; then copr-cli --config /tmp/stuff/.copr build -r Mageia-6-x86_64 jmiahman/Unity-Linux $(find ~/ -name *.src.rpm | tr " " "\n"| grep -m1 '\.rpm'); fi
