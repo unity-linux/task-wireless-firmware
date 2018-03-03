@@ -1,6 +1,6 @@
 Name:		task-wireless-firmware
 Version:	0.1.0
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	Metapackage to install all wireless firmware
 Group:		Graphical desktop/Other
 License:	GPL
@@ -13,6 +13,7 @@ Requires:       iwlwifi-3945-ucode
 Requires:       iwlwifi-4965-ucode
 Requires:       atmel-firmware
 Requires:       b43-openfwwf
+Requires:	ralink-firmware
 
 BuildArch:	noarch
 
